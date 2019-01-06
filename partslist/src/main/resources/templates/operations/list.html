@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<div th:fragment="partslist">
+    <table class="table table-bordered table-hover horizontal-align">
+        <h1>" "</h1>
+            <form action="#" th:action="@{/search}" method="post">
+                <p>Input part name: <input type="search" name="ser" id="ser" /></p>
+                <p><input type="submit" name="val" value="Submit" id="val" onclick="isEmpty()" /></p>
+                <script>
+                    function isEmpty() {
+                        if(document.getElementById("ser").value == ''){
+                            alert('Введите запрос');
+                        }
+                    }
+                </script>
+            </form>
+        <thead>
+        <tr>
+            <th class="dropdown" style="width: 25%">Наименование
+                <a th:href="@{'/sort/{sortByName}' (sortByName = 'ASC')}"><i class="fa fa-arrow-up"></i></a>
+                <a th:href="@{'/sort/{sortByName}' (sortByName = 'DESC')}"><i class="fa fa-arrow-down"></i></a>
+            </th>
+            <th style="width: 4%">Количество</th>
+            <th class="dropdown" style="width: 15%">Необходимость
+                <a th:href="@{'/sort/{sortByName}' (sortByName = 'true')}"><b>ДА</b></a>
+                <a th:href="@{'/sort/{sortByName}' (sortByName = 'false')}"><b>НЕТ</b></a>
+                <a th:href="@{'/sort/{sortByName}' (sortByName = 'ASC')}"><b>ВСЕ</b></a>
+            </th>
+            <th style="width: 5%">Редактировать</th>
+            <th style="width: 5%">Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="part : ${parts}">
+            <td th:text="${part.name}">Message</td>
+            <td th:text="${part.quantity}" style="text-align: center"></td>
+            <td style="text-align: center">
+                <i th:if="${part.need} == true"><b>ДА</b></i>
+                <i th:if="${part.need} == false"> <b>нет</b> </i>
+            </td>
+            <td style="text-align: center"><a th:href="@{'/edit/{id}'(id=${part.id})}"><i class="fa fa-edit" style="color: darkviolet"></i></a></td>
+            <td style="text-align: center"><a th:href="@{'/delete/{id}'(id=${part.id})}"><i class="fa fa-ban" style="color: darkred"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table border="1">
+        <tr >
+        <td style="width:32%">  Можно собрать:</td>
+        <td style="text-align: center" width="24%" th:action="tes" th:text="${assembly}"></td>
+        <td style="text-align: center" >Компьютеров</td>
+        </tr>
+    </table>
+    <ul class="nav nav-pills">
+        <li class="nav-item"
+            th:each="i : ${#numbers.sequence(1, data.totalPages)}">
+            <a th:href="@{/(page=${i -1})}" th:text="${i}" class="nav-link"></a>
+        </li>
+    </ul>
+</div>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <form class="form-horizontal" th:action="@{/save}" name="input_form" id="input_form"
+              method="post" role="form">
+            <h1>" "</h1>
+            <b>Input part name</b>
+            <div class="form-group">
+                <input type="text" class="form-control" id="message" th:name="name" th:value="*{name}" maxlength="100"/>
+            </div>
+            <b>Input quantity of parts</b>
+            <p></p>
+            <div class="form-group">
+                <input type="number" class="form-control" id="message" th:name="quantity" th:value="*{quantity}" maxlength="10"/>
+            </div>
+            <p></p>
+            <b>Select needs</b>
+            <p></p>
+            <div class="form-group">
+                <label class="radio">
+                    <input type="radio" value="1" th:checked="*{need}" th:name="needs" th:required="required" />
+                    <div class="radio__text">Part need for assembly</div>
+                </label>
+                <label class="radio">
+                    <input type="radio" value="0" th:checked="*{need}" th:name="needs" th:required="required" />
+                    <div class="radio__text">Optional part</div>
+                </label>
+                <p></p>
+                <p></p>
+                <button type="submit" class="btn btn-primary">
+                    Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

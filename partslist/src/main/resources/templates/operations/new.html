@@ -8,16 +8,16 @@
     <div th:replace="fragments/header :: header"></div>
     <div class="container">
         <form class="form-horizontal" th:action="@{/save}" name="input_form" id="input_form"
-              method="post" role="form">
+              method="post" role="form" th:required="required">
             <h1>" "</h1>
             <b>Input part name</b>
             <div class="form-group">
-                <input type="text" class="form-control" id="message" th:name="name" th:value="*{name}" maxlength="100"/>
+                <input type="text" class="form-control" id="message" th:name="name" th:value="*{name}" maxlength="100" th:required="required"/>
             </div>
             <b>Input quantity of parts</b>
             <p></p>
             <div class="form-group">
-                <input type="number" class="form-control" id="message" th:name="quantity" th:value="*{quantity}" maxlength="10"/>
+                <input type="number" class="form-control" id="message" th:name="quantity" th:value="*{quantity}" maxlength="10" th:required="required"/>
             </div>
             <p></p>
             <b>Select needs</b>
